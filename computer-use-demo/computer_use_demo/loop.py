@@ -1,8 +1,9 @@
 """
-Agentic sampling loop that calls the Anthropic API and local implenmentation of anthropic-defined computer use tools.
+Agentic sampling loop that calls the Anthropic API and local implementation of anthropic-defined computer use tools.
 """
 
 import platform
+import asyncio
 from collections.abc import Callable
 from datetime import datetime
 from enum import StrEnum
@@ -112,6 +113,8 @@ async def sampling_loop(
         )
 
         api_response_callback(cast(APIResponse[BetaMessage], raw_response))
+
+        await asyncio.sleep(2)
 
         response = raw_response.parse()
 
